@@ -1,0 +1,152 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" role="button" (click)="onOpenModal(null!, 'add')" href="#">Add Student</a>
+      </li>
+    
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" (ngModelChange)="searchStudents(key.value)" #key="ngModel" ngModel name="key" type="search" placeholder="Search" aria-label="Search">
+    </form>
+  </div>
+</nav>
+
+<!--CONTACT CARD-->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let student of students" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{student.name}}</h5>
+                        <p class="m-0"></p> <!-- ametikoht-->
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email: {{student.email}}</li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Date of birth: : {{student.dateOfBirth}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(student, 'edit')" href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(student, 'delete')" href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngFor="let student of students">
+  <div>{{student.name}}</div>
+</div>
+
+
+<div>Kirjuta ID, mida kustutada
+  <form>
+    <input name="studentId" id="studentId" type="text" [(ngModel)]="studentId">
+    <button (click)="deleteStudent(studentId)">Kinnita</button>
+  </form>
+</div>
+
+<!-- id: number;
+    name: string;
+    email: string;
+    dateOfBirth: Date;
+    age: number; -->
+
+
+<!--ADD MODAL-->
+<div class="modal" id="addStudentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Lisa Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addStudent(addForm)" #addForm="ngForm">
+          <input ngModel name="id" hidden type="text">
+          <label>Nimi</label> <br>
+          <input ngModel name="name" type="text"> <br>
+          <label>Email</label> <br>
+          <input ngModel name="email" type="email"> <br>
+          <label>Date of birth</label> <br>
+          <input ngModel name= "dateOfBirth" type="date"> <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sisesta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--EDIT MODAL-->
+<div class="modal" id="editStudentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Muuda Studentit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input type="hidden" name="id" ngModel="{{studentToEdit?.id}}">
+          <label for="name">Nimi</label>
+          <input type="text" ngModel="{{studentToEdit?.name}}" name="name">
+          <label for="">Email</label>
+          <input type="text" ngModel="{{studentToEdit?.email}}" name="email">
+          <label for="">Sünnikuupäev</label>
+          <input type="date" ngModel="{{studentToEdit?.dateOfBirth}}" name="dateOfBirth">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+            <button type="submit" (click)="editStudent(editForm.value)" class="btn btn-primary">Salvesta</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--DELETE MODAL-->
+<div class="modal" id="deleteStudentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Kas oled kindel, et tahad kustutada {{studentToDelete?.name}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ei</button>
+        <button type="button" (click)="deleteStudent(studentToDelete!.id)" data-dismiss="modal" class="btn btn-danger">Jah</button>
+      </div>
+    </div>
+  </div>
+</div>

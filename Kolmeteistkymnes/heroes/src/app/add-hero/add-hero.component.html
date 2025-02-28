@@ -1,0 +1,12 @@
+<p>add-hero works!</p>
+
+<form (ngSubmit)="onSubmit(addHeroForm)" #addHeroForm="ngForm">
+    <label>Nimi</label> <br>
+    <input ngModel name="name" type="text"> <br>
+    <label>Värv</label> <br>
+    <input ngModel name="color" type="text"> <br>
+    <label>Võime</label> <br>
+    <input ngModel name= "ability" type="text"> <br>
+    <button>Sisesta</button>
+</form>
+

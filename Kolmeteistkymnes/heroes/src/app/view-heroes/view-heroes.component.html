@@ -1,0 +1,34 @@
+<p>view-heroes works!</p>
+<div>{{kuvatav_stringina}}</div> 
+<div>{{kuvatav_numbrina}}</div>
+<div>{{kuvatav_booleanina}}</div>
+<div>Kõiki väärtuseid kuvatakse täpselt samamoodi,
+     teisendades nad vahetult enne väljakutsumist Stringiks.
+    Angularis on selle nimi String Interpolation</div>
+
+<hr>
+<div *ngFor="let i of [1,2,3]">{{i}}</div>
+<hr>
+<div *ngFor="let h of [{name: 'Superman', ability: 'flight'},
+                       {name: 'Spiderman', ability: 'shooting web'}]">
+    {{h.name}} (Hero's ability: {{h.ability}})</div>
+<hr>
+<div *ngFor="let hero of heroes">{{hero.name}} (suit color: {{hero.color}})</div>
+<hr>
+<div (click)="startFunctionAfterClick()">KLIKI NUPULE</div>
+<div (mouseover)="startFunctionAfterMouseover()">LIIGU HIIREGA ÜLE</div>
+<input (keypress)="startAfterKeypress()">
+
+<hr>
+<div *ngIf="false">Seda ei näidata</div>
+<div *ngIf="3*4 == 12">Seda näidatakse</div>
+<div *ngIf="hero.active">Seda näidatakse, kui muutuja on tõene</div>
+
+<input [(ngModel)]="heroCount" min="100" max="300" type="range">
+<input [(ngModel)]="heroCount" type="text">
+<div>{{heroCount}}</div>
+
+<app-one-hero [heroInput]="hero"></app-one-hero>
+
+
+

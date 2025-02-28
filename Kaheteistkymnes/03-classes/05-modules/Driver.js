@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Customer_1 = require("./Customer");
+let myCustomer3 = new Customer_1.Customer3("Heli", "Kopter");
+//myCustomer.firstName = "Heli";
+//myCustomer.lastName = "Kopter";
+myCustomer3.setFirstName("Maie");
+myCustomer3.lastName = "Mesi";
+console.log(myCustomer3.getFirstName());
+console.log(myCustomer3.lastName);

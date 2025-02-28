@@ -1,0 +1,24 @@
+<p>edit-hero works!</p>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <label>Nimi</label> <br>
+    <input formControlName="name" type="text" required> <br>
+    <label>Värv</label> <br>
+    <input formControlName="color" type="text" required> <br>
+    <label>Võime</label> <br>
+    <input formControlName= "ability" type="text" required> <br>
+    <label>Aktiivne?</label>
+    <input formControlName="active" type="checkbox"> <br>
+    <button [disabled]="form.invalid">Sisesta</button>
+</form>
+
+<button [disabled]="true">Mittevajutatav</button>
+<button [disabled]="4*5 != 20">Vajutatav</button>
+<button [disabled]="form.invalid">Kui vorm on mittevaliidne, siis mittevajutatav</button>
+<input [required]="hero.active"> <br>
+
+<img [src]="hero.imgSrc" alt="Juhul kui pilti ei kuvata, näidatakse seda teksti">
+<div [routerLink]="['/muuda/',hero.id]">Kliki, et minna aadressile /muuda/300</div>
+<!-- /\ need kaks on samaväärsed \/ -->
+<img src="{{hero.imgSrc}}" width="100px" alt="">
+<div routerLink="{{'/muuda/' + hero.id}}">Kliki, et minna aadressile /muuda/300</div>
